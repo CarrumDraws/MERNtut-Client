@@ -25,7 +25,7 @@ const UserWidget = ({ userId, picturePath }) => {
   // Fetch User Data.
   const token = useSelector((state) => state.token);
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
