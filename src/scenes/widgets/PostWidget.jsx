@@ -27,6 +27,7 @@ const PostWidget = ({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id); // Your ID
+  const url = useSelector((state) => state.url);
   const isLiked = Boolean(likes[loggedInUserId]); // Checks if Post is liked by you. likes[] is an array of UserID's.
   const likeCount = Object.keys(likes).length; // Object.keys() is a JS method that takes an object and returns an array of the objects' keys.
 
@@ -36,7 +37,7 @@ const PostWidget = ({
 
   // Likes/Unlikes a post
   const patchLike = async () => {
-    const response = await fetch(`/posts/${postId}/like`, {
+    const response = await fetch(`${url}/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -66,7 +67,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`/assets/${picturePath}`}
+          src={`${url}/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">

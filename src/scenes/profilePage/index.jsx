@@ -12,11 +12,12 @@ const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const { userId } = useParams(); // Get userID of person from URL parameter...
   const token = useSelector((state) => state.token);
+  const url = useSelector((state) => state.url);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   // ...and fetch the User's data...
   const getUser = async () => {
-    const response = await fetch(`/users/${userId}`, {
+    const response = await fetch(`${url}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

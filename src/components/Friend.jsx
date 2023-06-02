@@ -15,6 +15,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const { _id } = useSelector((state) => state.user); // Your ID
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
+  const url = useSelector((state) => state.url);
 
   const { palette } = useTheme();
   const primaryLight = palette.primary.light;
@@ -26,16 +27,13 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   // Adds/Removes Friend + updates Friend list
   const patchFriend = async () => {
-    const response = await fetch(
-      `/users/${_id}/${friendId}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${url}/users/${_id}/${friendId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
   };

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "state";
 import FlexBetween from "components/FlexBetween";
 import { Formik } from "formik"; // Error Handling/Form Validation
@@ -48,6 +48,7 @@ const initialvaluesLogin = {
 function Form() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const url = useSelector((state) => state.url);
   const isNonMobile = useMediaQuery("(min-width:600px");
 
   const [pageType, setPageType] = useState("login");
@@ -57,7 +58,7 @@ function Form() {
   const { palette } = useTheme();
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("/auth/login", {
+    const loggedInResponse = await fetch(`${url}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
@@ -83,13 +84,10 @@ function Form() {
       formData.append(value, values[value]);
     }
     formData.append("picturePath", values.picture.name);
-    const savedUserResponse = await fetch(
-      "/auth/register",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const savedUserResponse = await fetch(`${url}/auth/register`, {
+      method: "POST",
+      body: formData,
+    });
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
 

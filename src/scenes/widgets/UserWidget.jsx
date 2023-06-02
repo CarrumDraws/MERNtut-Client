@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 // This is the left-side user profile section
 const UserWidget = ({ userId, picturePath }) => {
+  const url = useSelector((state) => state.url);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
@@ -25,7 +26,7 @@ const UserWidget = ({ userId, picturePath }) => {
   // Fetch User Data.
   const token = useSelector((state) => state.token);
   const getUser = async () => {
-    const response = await fetch(`/users/${userId}`, {
+    const response = await fetch(`${url}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

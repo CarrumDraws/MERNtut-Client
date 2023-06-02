@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
-
+import { useSelector } from "react-redux";
 // Profile Picture Component
 const UserImage = ({ image, size = "60px" }) => {
+  const url = useSelector((state) => state.url);
   return (
     <Box width={size} height={size}>
       <img
@@ -9,7 +10,7 @@ const UserImage = ({ image, size = "60px" }) => {
         width={size}
         height={size}
         alt="user"
-        src={`/assets/${image}`}
+        src={`${url}/assets/${image}`}
       />
     </Box>
   );
