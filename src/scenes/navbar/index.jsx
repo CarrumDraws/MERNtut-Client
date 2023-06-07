@@ -58,7 +58,7 @@ const Navbar = () => {
             },
           }}
         >
-          Sociopedia
+          DoopityScoopity
         </Typography>
         {isNonMobileScreens && (
           // DESKTOP SEARCH
